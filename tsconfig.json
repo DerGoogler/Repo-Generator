@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "typeRoots": ["src/typings/global.d.ts"],
+    "sourceMap": true,
+    "declaration": false,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "target": "es5",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "jsx": "react-jsx"
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
+  "include": ["./src/**/*"]
+}
