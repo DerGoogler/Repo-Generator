@@ -3,15 +3,25 @@ import { Configuration } from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
+const defConfig = {
+  output: {
+    filename: "bundle/[name].bundle.js",
+    path: resolve(__dirname, "./dist/"),
+    assetModuleFilename: "files/[name].[ext]",
+  },
+};
+
+const defPlugins = [
+  new MiniCssExtractPlugin({
+    filename: "bundle/[name].bundle.css",
+  }),
+];
+
 const config: Configuration = {
   entry: {
     app: ["./src/index.tsx"],
   },
-  output: {
-    filename: "bundle/[name].bundle.js",
-    path: resolve(__dirname, "dist"),
-    assetModuleFilename: "files/[name].[ext]",
-  },
+  ...defConfig,
   module: {
     rules: [
       {
@@ -25,12 +35,16 @@ const config: Configuration = {
         exclude: /node_modules/,
       },
       {
+        test: /\.pegjs$/,
+        use: ["babel-loader", "pegjs-loader"],
+      },
+      {
         test: /\.yaml$/,
         use: "js-yaml-loader",
       },
       {
-        test: /\.s(a|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader", "less-loader"],
+        test: /\.(scss|css)$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
@@ -64,11 +78,6 @@ const config: Configuration = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "bundle/[name].bundle.css",
-    }),
-  ],
   resolveLoader: {
     modules: ["node_modules", join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
   },
@@ -78,4 +87,4 @@ const config: Configuration = {
   },
 };
 
-module.exports = config;
+export { defConfig, config, defPlugins };
