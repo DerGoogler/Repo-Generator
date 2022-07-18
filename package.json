@@ -12,13 +12,15 @@
     "@date-io/moment": "^2.14.0",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@giscus/react": "^2.0.6",
     "@mui/material": "^5.9.0",
     "file-saver": "^2.0.5",
     "findbyview": "^1.0.1",
     "googlers-tools": "^1.2.7",
     "jszip": "^3.10.0",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-swipeable-views": "^0.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -31,6 +33,7 @@
     "@types/react": "^18.0.10",
     "@types/react-dom": "^18.0.5",
     "@types/react-onsenui": "^2.9.17",
+    "@types/react-swipeable-views": "^0.13.1",
     "@types/react-twemoji": "^0.4.0",
     "@types/uglifyjs-webpack-plugin": "^1.1.2",
     "@types/webpack": "^5.28.0",

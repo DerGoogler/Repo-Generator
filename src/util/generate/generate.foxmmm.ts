@@ -1,18 +1,38 @@
-export const generate_py = (name: string, title: string) => {
+import removeWhenNull from "../removeWhenNull";
+
+interface GenerateFoxMMMProps {
+  name: string;
+  title: string;
+  website: string;
+  support: string;
+  donate: string;
+  submit: string;
+}
+
+const generate_foxmmm = (props: GenerateFoxMMMProps) => {
   return `import sys
 import json
 import os
 from github import Github
 
 # Configuration
-REPO_NAME = "${name}"
-REPO_TITLE = "${title}"
+REPO_NAME = "${props.name}"
+REPO_TITLE = "${props.title}"
+REPO_WEBSITE = ${removeWhenNull(props.website)}
+REPO_SUPPORT = ${removeWhenNull(props.support)}
+REPO_DONATE = ${removeWhenNull(props.donate)}
+REPO_SUBMIT_MODULE = ${removeWhenNull(props.submit)}
 
 # Skeleton for the repository
 meta = {
     "name": REPO_TITLE,
-    "last_update": "",
-    "modules": []
+    "name": REPO_TITLE,
+    "website": REPO_WEBSITE,
+    "support": REPO_SUPPORT,
+    "donate": REPO_DONATE, 
+    "submitModule": REPO_SUBMIT_MODULE,
+    "modules": [],
+    "last_update": ""
 }
 
 # Initialize the GitHub objects
@@ -54,3 +74,5 @@ for repo in repos:
 # Return our final skeleton
 print(json.dumps(meta, indent=4, sort_keys=True))`;
 };
+
+export { generate_foxmmm, GenerateFoxMMMProps };
